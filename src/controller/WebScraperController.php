@@ -17,8 +17,7 @@ class WebScraperController{
 	
 	public function doWebScrape(){
 		
-		$this->webScraper->getData(); 
-		
+		$this->webScraper->getChosenData(); 
 		
 		return $this->webScraperView->showUrlJson("#"); 
 	}
