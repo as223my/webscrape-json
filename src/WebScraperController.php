@@ -16,20 +16,31 @@ class WebScraperController{
 	
 	public function doWebScrape(){
 		
-		$timeNow = time();
+		if($this->webScraperFiles->jsonFileExists()){
+			
+			$contentJsonFile = $this->webScraperFiles->getContetJsonFile();
+			$time = $contentJsonFile[0]['Timestamp']; 
+			
+			$timeNow = time();
+			$timeJson = $time + 60*5; 
+			
+			if($timeJson < $timeNow){
 				
-		if(!$this->webScraperFiles->jsonFileExists() || $this->webScraperFiles->checkTime($timeNow) === true){
-
+				$content = $this->webScraper->getChosenData(); 
+				$fileUrl = $this->webScraperFiles->postJsonToFile($content); 
+			
+				return $fileUrl;
+				
+			}else{
+				return $this->webScraperFiles->getUrlJsonFile();
+			}
+						
+		}else{
+			
 			$content = $this->webScraper->getChosenData(); 
 			$fileUrl = $this->webScraperFiles->postJsonToFile($content); 
 			
-			$this->webScraperFiles->addTime(); 
-			
 			return $fileUrl;
-			
-		}else{
-			
-			return $this->webScraperFiles->getUrlJsonFile(); 
 		}
 		
 	}

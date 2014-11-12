@@ -5,6 +5,7 @@ Class WebScraper{
 	private $url;
 	private $content; 
 	private $labels;
+	private $countCourses; 
 	
 	public function __construct(){
 		$this->url = "http://coursepress.lnu.se/kurser/"; 	
@@ -26,19 +27,18 @@ Class WebScraper{
 			if($dom->loadHTML($data)){
 				
 				$xpath = new \DOMXPath($dom); 
+				
 				// letar upp alla ul taggar med id blog-lists, i ul leta efter div med klass item-title. välj a-tagg.
 				$items = $xpath->query('//ul[@id = "blogs-list"]//div[@class ="item-title"]/a');
-		
+			
 				foreach ($items as $item) {
 					
 					if (strpos($item->getAttribute("href") ,"kurs") !== false){
-					
+					$this->countCourses ++; 
 					$manyThings = $this->getCourseInfo($item->getAttribute("href")); 	
-					//var_dump($manyThings); 
-					$this->content[] = array($this->labels[0] =>utf8_decode($item->nodeValue), $this->labels[1]=>utf8_decode($item->getAttribute("href")), $this->labels[2]=>$manyThings[0],$this->labels[3]=>$manyThings[1], $this->labels[4]=>$manyThings[2], 
-					$this->labels[5]=>$manyThings[3], $this->labels[6]=>$manyThings[4], $this->labels[7]=>$manyThings[5]); 
-				
-					//echo $item->nodeValue . " --> " .$item->getAttribute("href") . "<br />"; 
+			
+					$this->content[] = array($this->labels[0] =>utf8_decode($item->nodeValue), $this->labels[1]=>utf8_decode($item->getAttribute("href")), $this->labels[2]=>$manyThings[0],
+					$this->labels[3]=>$manyThings[1], $this->labels[4]=>$manyThings[2], $this->labels[5]=>$manyThings[3], $this->labels[6]=>$manyThings[4], $this->labels[7]=>$manyThings[5]); 
 					}
 				} 
 		
@@ -53,21 +53,16 @@ Class WebScraper{
 				if($this->content[$i][$value] == null){
 				$this->content[$i][$value] = "no information"; 
 				}
-				
 			}
 		}
-		
-	$a = json_encode($this->content,JSON_PRETTY_PRINT);
-	//printf("<pre>%s</pre>", $a);
-		//die();
-		//var_dump($this->content); 
-		return $a; 
+		array_unshift($this->content, array('Number of courses'=>$this->countCourses, 'Timestamp' => time())); 
+		return $this->content; 
 	}
 	
 	public function checkEndSide($data){
 		
 		$dom = new \DOMDocument(); 
-		//'<?xml encoding="UTF-8">' .
+	 
 		if($dom->loadHTML($data)){
 			$xpath = new \DOMXPath($dom); 
 			$numbers = $xpath->query('//div[@id = "blog-dir-pag-bottom"]/a[@class ="page-numbers"]');
@@ -90,7 +85,7 @@ Class WebScraper{
 		// Talar om att det vi hämtar hem inte ska skrivas ut direkt.
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	
-		curl_setopt($ch, CURLOPT_REFERER, "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']); 
+		curl_setopt($ch, CURLOPT_USERAGENT,"as223my"); 
 	
 		$data = curl_exec($ch);
 		curl_close($ch); 
