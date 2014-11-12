@@ -1,23 +1,23 @@
 <?php
-namespace view; 
 
-class HTMLView {
+class HTMLView{
 
-	public function echoHTML($content){
+	public function echoHTML($url){
 		
-		if ($content === NULL){
+		if ($url === NULL){
 			throw new \Exception("HTMLView::echoHTML does not allow body to be null");
 		}
 			
-		echo"
+		echo "
 		<!DOCTYPE html>
 		<html>
 			<head>
-			<title>Laboration 1</title>
+			<title>WebScraper</title>
 			<meta charset ='utf-8' />
 			</head>
 			<body>
-				$content
+				<h1>Web Scraper</h1>
+				<a href=$url>Result Web Scraper</a>
 			</body>
 		</html>";
 	}

@@ -1,12 +1,14 @@
 <?php
 
-require_once("src/view/HTMLView.php");
-require_once("src/controller/WebScraperController.php");
+require_once("src/HTMLView.php");
+require_once("src/WebScraperController.php");
 
-$htmlView = new \view\HTMLView();
+$controller = new \WebScraperController();
+$view = new \HTMLView();
 
-$controller = new \controller\WebScraperController();
-$html = $controller->doWebScrape();
+$url = $controller->doWebScrape();
 
-$htmlView ->echoHTML($html);
+$view->echoHTML($url); 
+
+
    
