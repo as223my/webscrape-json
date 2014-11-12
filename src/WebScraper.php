@@ -55,7 +55,7 @@ Class WebScraper{
 				}
 			}
 		}
-		array_unshift($this->content, array('Number of courses'=>$this->countCourses, 'Timestamp' => time())); 
+		array_unshift($this->content, array('Number of courses'=>$this->countCourses, 'Last scrape'=>date("y/m/d h:i:s A",time()), 'Timestamp' => time())); 
 		return $this->content; 
 	}
 	

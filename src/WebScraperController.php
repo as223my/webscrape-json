@@ -41,7 +41,6 @@ class WebScraperController{
 			$fileUrl = $this->webScraperFiles->postJsonToFile($content); 
 			
 			return $fileUrl;
-		}
-		
+		}	
 	}
 }
