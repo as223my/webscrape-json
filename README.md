@@ -47,7 +47,11 @@ Varje anrop kräver att man skickar med information så att ASP.NET view state i
 
 ### 8. Hitta ett rättsfall som handlar om webbskrapning. Redogör kort för detta.
 
+Ett av de första stora rättsfallen (2003) som involverar webb skrapning var American airlines som stämde företaget FareChase.   
+FareChase använde sig av American Airlines webbsida för att skrapa information om dess priser för att använda vidare i sin tjänst som de sedan sålde för att jämföra olika priser på flygningar. 
+FareChase överklagade domen (beslutet) och de båda företagen gjorde upp, och överklagningen lades därefter ner. 
 
+Facebook vann även 2009 ett rättsfall om upphovsrätt mot en känd webb skrapa. 
 
 ### 9. Känner du att du lärt dig något av denna uppgift?
 
