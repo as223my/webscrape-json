@@ -42,7 +42,7 @@ Varje anrop kräver att man skickar med information så att ASP.NET view state i
 
  * Jag får massa varningar om ex. DOMDocument::loadHTML(): Tag header invalid in Entity. Har för tillfället tagit bord varningarna med hjälp av libxml_use_internal_errors(true); 
  
- * Ville från början strukturera upp koden till mvc standard, men jag var osäker vart jag skulle placera de olika funktionerna. 
+ * Ville från början strukturera upp koden enligt mvc standard, men jag var osäker vart jag skulle placera de olika funktionerna. 
  
 
 ### 8. Hitta ett rättsfall som handlar om webbskrapning. Redogör kort för detta.
