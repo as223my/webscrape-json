@@ -20,4 +20,9 @@ Reflektion
 
 ### 8. Hitta ett rättsfall som handlar om webbskrapning. Redogör kort för detta.
 
+
+
 ### 9. Känner du att du lärt dig något av denna uppgift?
+
+Jag har lärt mig mycket! Har aldrig skrapat data från andra webbplatser förut, så allt var i princip nytt och kul att genomföra. 
+Specielt xpath var lite klurigt, hur jag skulle formulera min fråga för att få rätt information tillbaka. 

@@ -15,30 +15,39 @@ Class WebScraper{
 	
 	public function getChosenData(){
 		
+		// extra tid att utföra webscrapningen till 5min, för att undvika error. 
 		ini_set('max_execution_time', 300);
 
+		// hämtar antal sidor med kurser. 
 		$number = $this->checkEndSide($this->getData($this->url)); 
+		
 		for($i=1; $i<= $number; $i++){
 		
+			// url till vardera sida för skrapning. 
 			$data = $this->getData($this->url."?bpage=".$i);
 			
 			$dom = new \DOMDocument(); 
 	
+			// laddar $data som html. 
 			if($dom->loadHTML($data)){
 				
 				$xpath = new \DOMXPath($dom); 
 				
-				// letar upp alla ul taggar med id blog-lists, i ul leta efter div med klass item-title. välj a-tagg.
+				// letar upp alla ul taggar med id blog-lists, i ul leta efter div med klass item-title, välj a-tagg.
 				$items = $xpath->query('//ul[@id = "blogs-list"]//div[@class ="item-title"]/a');
 			
 				foreach ($items as $item) {
 					
+					// om a tagen innehåller ordet kurs i urlen.
 					if (strpos($item->getAttribute("href") ,"kurs") !== false){
-					$this->countCourses ++; 
-					$manyThings = $this->getCourseInfo($item->getAttribute("href")); 	
-			
-					$this->content[] = array($this->labels[0] =>utf8_decode($item->nodeValue), $this->labels[1]=>utf8_decode($item->getAttribute("href")), $this->labels[2]=>$manyThings[0],
-					$this->labels[3]=>$manyThings[1], $this->labels[4]=>$manyThings[2], $this->labels[5]=>$manyThings[3], $this->labels[6]=>$manyThings[4], $this->labels[7]=>$manyThings[5]); 
+						
+						$this->countCourses ++; 
+						
+						// Hämtar information om varje kurs. 
+						$manyThings = $this->getCourseInfo($item->getAttribute("href")); 	
+				
+						$this->content[] = array($this->labels[0] =>utf8_decode($item->nodeValue), $this->labels[1]=>utf8_decode($item->getAttribute("href")), $this->labels[2]=>$manyThings[0],
+						$this->labels[3]=>$manyThings[1], $this->labels[4]=>$manyThings[2], $this->labels[5]=>$manyThings[3], $this->labels[6]=>$manyThings[4], $this->labels[7]=>$manyThings[5]); 
 					}
 				} 
 		
@@ -47,6 +56,7 @@ Class WebScraper{
 			}
 		}
 
+		// ändrar alla null värden i multidimensionella arrayen till "no information".  
 		for($i=0; $i<count($this->content); $i++){
 			
 			foreach ($this->labels as $value){
@@ -55,10 +65,13 @@ Class WebScraper{
 				}
 			}
 		}
-		array_unshift($this->content, array('Number of courses'=>$this->countCourses, 'Last scrape'=>date("y/m/d h:i:s A",time()), 'Timestamp' => time())); 
+		
+		// lägger till antal kurser, datum för sista skrapning samt ett timestamp i som placeras över i arrayen content.  
+		array_unshift($this->content, array('Number of courses'=>$this->countCourses, 'Last scrape'=>date("y/m/d h:i :s A",time()), 'Timestamp' => time())); 
 		return $this->content; 
 	}
 	
+	// returnerar antal sidor som ska skrapas. 
 	public function checkEndSide($data){
 		
 		$dom = new \DOMDocument(); 
@@ -80,11 +93,13 @@ Class WebScraper{
 	public function getData($url){
 		
 		$ch = curl_init(); 
+		
 		curl_setopt($ch, CURLOPT_URL , $url); 
 	
-		// Talar om att det vi hämtar hem inte ska skrivas ut direkt.
+		// talar om att det vi hämtar hem inte ska skrivas ut direkt.
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	
+		// identifierar mig. 
 		curl_setopt($ch, CURLOPT_USERAGENT,"as223my"); 
 	
 		$data = curl_exec($ch);
@@ -93,6 +108,7 @@ Class WebScraper{
 		return $data; 
 	}
 	
+	// hämtar all information vi vill ha om en kurs. 
 	public function getCourseInfo($url){
 		libxml_use_internal_errors(true);
 		
@@ -124,7 +140,9 @@ Class WebScraper{
 		}	
 	}
 	
+	// returnerar kurskod. 
 	public function getCourseID($xpath){
+		
 		$id = $xpath->query('//div[@id = "header-wrapper"]//li/a[@title]');
 		
 		foreach ($id as $item) {
@@ -133,6 +151,7 @@ Class WebScraper{
 		}
 	}
 	
+	// returnerar kursplan url. 
 	public function getCoursePlanURL($xpath){
 	
 		$a = $xpath->query('//ul[@class= "sub-menu"]//li/a');
@@ -147,6 +166,7 @@ Class WebScraper{
 		}
 	}
 	
+	// returnerar välkoms texten för kursen.
 	public function getCourseText($xpath){
 		
 		$text = $xpath->query('//div[@class= "entry-content"]/p');
@@ -157,11 +177,11 @@ Class WebScraper{
 		}
 	}
 	
+	// returnerar rubriken för första inlägget.
 	public function getCoursePost($xpath){
 		
 		$h1 = $xpath->query('//header[@class= "entry-header"]/h1[@class= "entry-title"]');
 	
-		
 		$count = 0; 
 		foreach ($h1 as $item) {
 			if($count == 0){
@@ -171,13 +191,16 @@ Class WebScraper{
 		}
 	}
 	
+	// returnerar författare och tid till första inlägget. 
 	public function getCoursePostAuthor($xpath){
+		
 		$line = $xpath->query('//header[@class= "entry-header"]/p[@class= "entry-byline"]');
 		$human = $xpath->query('//header[@class= "entry-header"]/p[@class= "entry-byline"]/strong');
 		
 		$count = 0;
 		$time = null;
 		$author = null;
+		
 		foreach ($line as $item) {
 			if($count == 0){
 			

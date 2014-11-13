@@ -10,14 +10,15 @@ Class WebScraperFiles{
 		$this->fileString = "./src/webScraperResult.json"; 
 		$this->returnfileString = "src/webScraperResult.json";
 	}
-	
+
 	public function jsonFileExists(){
 		
 		$bool = file_exists($this->fileString);
 		return $bool; 
 	}
-	
+
 	public function getContetJsonFile(){
+		
 		$content = file_get_contents($this->fileString);
 		return json_decode($content, true);
 	}
@@ -26,6 +27,10 @@ Class WebScraperFiles{
 		return $this->returnfileString;
 	}
 	
+	/*
+	 * postar data till json filen, skapar en ny fil om ingen finns, 
+	 * annars töms den existerande filen och ny data skrivs in.
+	 */ 
 	public function postJsonToFile($json){
 		
 		if(!$this->jsonFileExists()){
@@ -40,6 +45,4 @@ Class WebScraperFiles{
 		
 		return $this->returnfileString; 
 	}
-	
-
 }
