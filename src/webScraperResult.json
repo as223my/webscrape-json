@@ -1,8 +1,18 @@
 [
     {
         "Number of courses": 68,
-        "Last scrape": "14\/11\/13 12:21 :34 AM",
-        "Timestamp": 1415834494
+        "Last scrape": "14\/11\/13 01:11 :32 PM",
+        "Timestamp": 1415880692
+    },
+    {
+        "Course name": "Grafisk design",
+        "Course link": "http:\/\/coursepress.lnu.se\/kurs\/grafisk-design\/",
+        "Course code": "1DI101",
+        "Curriculum url": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DI101&documenttype=pdf&lang=sv",
+        "Course info": "Kursen Grafisk Design ing\u00e5r som obligatorisk kurs under andra \u00e5ret vid utbildningsprogrammet Interaktionsdesigner vid Linn\u00e9universitetet. M\u00e5let med kursen \u00e4r att studenten skall f\u00e5 en god f\u00f6rst\u00e5else f\u00f6r hur man skapar och tolkar bild f\u00f6r digitalt och analogt bruk. Studenten skall \u00e4ven kunna anv\u00e4nda sig av designprocessen f\u00f6r att presentera bild och text via webbl\u00f6sningar, datorprogram samt f\u00f6r tryck. Fokus ligger p\u00e5 bildbehandling utifr\u00e5n ett professionellt perspektiv med fokus p\u00e5 bildanalys och f\u00f6rst\u00e5else. Kursen best\u00e5r av f\u00f6ljande tv\u00e5 delkurser:",
+        "Latest post": "Kurshemsida uppdaterad",
+        "Author": "Morgan Rydbrink",
+        "Time posted": "2014-11-05 01:05"
     },
     {
         "Course name": "Avancerade LAN-teknologier",
@@ -73,16 +83,6 @@
         "Latest post": "no information",
         "Author": "no information",
         "Time posted": "no information"
-    },
-    {
-        "Course name": "Grafisk design",
-        "Course link": "http:\/\/coursepress.lnu.se\/kurs\/grafisk-design\/",
-        "Course code": "1DI101",
-        "Curriculum url": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DI101&documenttype=pdf&lang=sv",
-        "Course info": "Kursen Grafisk Design ing\u00e5r som obligatorisk kurs under andra \u00e5ret vid utbildningsprogrammet Interaktionsdesigner vid Linn\u00e9universitetet. M\u00e5let med kursen \u00e4r att studenten skall f\u00e5 en god f\u00f6rst\u00e5else f\u00f6r hur man skapar och tolkar bild f\u00f6r digitalt och analogt bruk. Studenten skall \u00e4ven kunna anv\u00e4nda sig av designprocessen f\u00f6r att presentera bild och text via webbl\u00f6sningar, datorprogram samt f\u00f6r tryck. Fokus ligger p\u00e5 bildbehandling utifr\u00e5n ett professionellt perspektiv med fokus p\u00e5 bildanalys och f\u00f6rst\u00e5else. Kursen best\u00e5r av f\u00f6ljande tv\u00e5 delkurser:",
-        "Latest post": "Kurshemsida uppdaterad",
-        "Author": "Morgan Rydbrink",
-        "Time posted": "2014-11-05 01:05"
     },
     {
         "Course name": "Grafiska verktyg",
